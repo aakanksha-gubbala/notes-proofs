@@ -6,6 +6,7 @@
 * Solving methods
   * FEM
   * Spectral methods
+  * Tricks for solving different geometries
 * Special math functions
   * Airy ODEs
   * Greens functions

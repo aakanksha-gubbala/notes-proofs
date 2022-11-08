@@ -2,7 +2,7 @@
 
 * Smoluchowski and Fokkar Planck equation
 * Field theories
-* Thermo cheat sheet
+* [Thermo cheat sheet](thermo-cheat-sheet/thermo.pdf)
 * Solving methods
   * FEM
   * Spectral methods

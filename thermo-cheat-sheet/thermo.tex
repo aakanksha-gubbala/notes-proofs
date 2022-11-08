@@ -1,0 +1,217 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper,margin=0.8in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{xhfill}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{longtable}
+\usepackage[tableposition=below]{caption}
+\captionsetup[longtable]{skip=1em}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{multicol}
+\hypersetup{
+    colorlinks=true,
+    allcolors=blue
+}
+
+%% Code style
+\lstdefinestyle{mystyle}{  
+    commentstyle=\color{gray},
+    keywordstyle=\color{magenta},
+    stringstyle=\color{violet},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                                                    
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%% Command for rule after section title
+\newcommand\ruleafter[1]{#1~\xrfill[.5ex]{1pt}}
+
+%% Trailing line after the section title
+\titleformat{\section}
+{\large\bfseries}
+{\thesection $|$}
+{0.1cm}
+{\ruleafter}
+
+\titleformat{\subsection}
+{}
+{\thesubsection}
+{0.1cm}
+{}
+
+%% Spacing before and after the title
+\titlespacing*{\section}
+{0pt}{0.4cm}{0.4cm}
+
+%% Spacing before and after \begin{...}
+\setlist{nosep}
+\setlist[itemize]{noitemsep, topsep=0pt}
+
+%% Header & footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%% Bibliography 
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{csquotes}
+\usepackage[doi=false,isbn=false,url=false,eprint=false,sortcites=true,sorting=nyt,style=ieee,backend=biber]{biblatex} 
+% styles=nature,science,ieee
+\addbibresource{ref.bib}
+
+%% maketitle inputs
+\makeatletter
+\def\subject#1{\gdef\@subject{#1}}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@maketitle{
+    \vspace*{-1.5cm}
+    \rule{\textwidth}{1pt}
+    {\scshape \Large \@title} \hfill {\scshape \Large \@subject} \\
+    {\scshape \@subtitle} \hfill {\scshape \@date} \\
+    \rule{\textwidth}{1pt}
+}
+\makeatother
+
+\title{Cheat Sheet}
+\subtitle{}
+\subject{Thermodynamics}
+\date{\today}
+
+\begin{document}
+\let\endtitlepage\relax
+\setlength{\parindent}{0pt}
+\pagenumbering{arabic}
+\setstretch{1}
+
+\maketitle\thispagestyle{fancy}
+
+\begin{multicols}{2}
+\section{Fundamental Equations}
+In derivatives,
+\begin{subequations}\label{eq:fund_eq}
+\begin{align}
+	dU &= TdS - PdV + \mu dN\\
+	dH &= TdS + VdP + \mu dN\\ 
+	dG &= -SdT + VdP + \mu dN\\ 
+	dA &= -SdT - PdV + \mu dN
+\end{align}
+\end{subequations}
+In integrated form,
+\begin{subequations}\label{eq:fund_eq_int}
+	\begin{align}
+		H &= U + PV\\
+		G &= U + PV - TS = H - TS\\
+		A &= G - PV = U - TS
+	\end{align}
+\end{subequations}
+
+\section{Maxwell Relations}
+\begin{subequations}\label{eq:maxwell}
+	\begin{align}
+		\frac{\partial T}{\partial V}\bigg|_S &= -\frac{\partial P}{\partial S}\bigg|_V\\
+		\frac{\partial T}{\partial P}\bigg|_S &= \frac{\partial V}{\partial S}\bigg|_P\\
+		\frac{\partial S}{\partial P}\bigg|_T &= -\frac{\partial V}{\partial T}\bigg|_P\\
+		\frac{\partial S}{\partial V}\bigg|_T &= \frac{\partial P}{\partial T}\bigg|_V
+	\end{align}
+\end{subequations}
+
+\section{Measurable Properties}
+\begin{equation}\label{eq:Cp}
+	C_P = \frac{\partial U}{\partial T}\bigg|_V = T\frac{\partial S}{\partial T}\bigg|_V = -T\frac{\partial^2 A}{\partial T^2}\bigg|_V
+\end{equation}
+\begin{equation}\label{eq:Cv}
+	C_V = \frac{\partial H}{\partial T}\bigg|_P = T\frac{\partial S}{\partial T}\bigg|_P = -T\frac{\partial^2 G}{\partial T^2}\bigg|_P
+\end{equation}
+\begin{equation}\label{eq:kappat}
+	\kappa_T = \frac{-1}{V}\frac{\partial V}{\partial P}\bigg|_T = \frac{1}{\rho}\frac{\partial \rho}{\partial P}\bigg|_T
+\end{equation}
+\begin{equation}\label{eq:kappas}
+	\kappa_S = \frac{-1}{V}\frac{\partial V}{\partial P}\bigg|_S = \frac{1}{\rho}\frac{\partial \rho}{\partial P}\bigg|_S
+\end{equation}
+\begin{equation}\label{eq:alpha}
+	\alpha = \frac{1}{V}\frac{\partial V}{\partial T}\bigg|_P = \frac{-1}{\rho}\frac{\partial \rho}{\partial T}\bigg|_P
+\end{equation}
+\begin{equation}\label{eq:cp-cv}
+	C_P - C_V = \frac{Tv\alpha^2}{\kappa_T}
+\end{equation}
+\begin{equation}\label{eq:jtcoeff}
+	\mu_{JT} = \frac{V}{C_P}(\alpha T - 1)
+\end{equation}
+\begin{equation}
+	\frac{\kappa_T}{\kappa_S} = \frac{C_P}{C_V}
+\end{equation}
+
+\section{Ideal gas and water properties}
+$C_P = \tfrac{5}{2}R$ and $C_V = \tfrac{3}{2}R$. $u_{ig} = \tfrac{3}{2}RT$.
+\begin{subequations}
+	\begin{align*}
+		\gamma &= 1.4\quad \text{Air, }N_2,\ O_2,\ H_2\\
+		&= 1.67\quad Ar,\ He\\
+		&= 1.30\quad CO_2
+	\end{align*}
+\end{subequations}
+Water: $V=18$ cm$^3$/mol, $T_c=647$ K, $P_c=220$ bar, $C_P=4.18$ J/(g.K).
+
+\section{Calculus Tricks}
+Inversion:
+\begin{equation}
+	\frac{\partial X}{\partial Y}\bigg|_Z = 1 / \frac{\partial Y}{\partial X}\bigg|_X
+\end{equation}
+Triple product:
+\begin{equation}
+	\frac{\partial X}{\partial Y}\bigg|_Z \frac{\partial Y}{\partial Z}\bigg|_X \frac{\partial Z}{\partial X}\bigg|_Y = -1
+\end{equation}
+Non-natural deriavtive:
+\begin{equation}
+	\frac{\partial X}{\partial Y}\bigg|_Z = \frac{\partial X}{\partial Y}\bigg|_W + \frac{\partial X}{\partial W}\bigg|_Y\frac{\partial W}{\partial Y}\bigg|_Z
+\end{equation}
+
+\section{Gibbs-Duhem Equation}
+\begin{equation}\label{eq:gd-eq}
+	\sum_i n_i\frac{\partial \mu_i}{\partial n_k}\bigg|_{T, P, n^\prime} = 0 \iff \sum_i x_i\frac{\partial \mu_i}{\partial x_k}\bigg|_{T, P, n^\prime} = 0 
+\end{equation}
+
+\section{Bakius-Roozeboom Equation}
+\begin{equation}\label{eq:br-eq}
+	\frac{\partial g}{\partial x_j}\bigg|_{T, P, x^\prime} = \mu_j - \mu_c\quad j=1\dots c-1
+\end{equation}
+
+\section{Statistical Mechanics}
+Stirling's approximation:
+\begin{equation}
+	n! \approx n^n e^{-n} \sqrt{2\pi n}
+\end{equation}
+$N$-site binary system at level $s$:
+\begin{equation}
+	p(s) = \bigg(\frac{2}{\pi N}\bigg)^{\tfrac{1}{2}}e^{-\frac{2s^2}{N}}
+\end{equation}
+$N$ harmonic oscillators at $E=n$:\\
+\begin{equation}
+	\Sigma (N, n) = \frac{(N+n-1)!}{n!(N-1)!}
+\end{equation}
+
+\end{multicols}
+
+% \printbibliography[title={References}]
+\end{document}

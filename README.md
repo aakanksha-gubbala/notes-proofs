@@ -11,3 +11,7 @@
   * Airy ODEs
   * Greens functions
   
+# Python snippets
+
+* [`latex-plots.py`](python-snippets/latex-plots.py) has the format for general-purpose plotting.
+  
